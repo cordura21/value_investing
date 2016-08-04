@@ -18,6 +18,10 @@ dcf_calc <- function(price ,
                      years.stable = 10
   
 ){
+
+  
+  
+  
   
   growth.eps <- rep(1+growth.rate,years.growth)
   growth.eps <- cumprod(growth.eps)
@@ -48,6 +52,7 @@ dcf_calc <- function(price ,
   full.eps.vector <- c(-price,stable.eps + growth.eps)
   # return(list(pv.growth,pv.stable,(pv.growth + pv.stable),
   #             -(price / (sum(pv.growth) + sum(pv.stable)) -1))
-  return(-(price / (sum(pv.growth) + sum(pv.stable)) -1))
+  returnObject <- -(price / (sum(pv.growth) + sum(pv.stable)) -1)
+  return(returnObject)
 
 }
