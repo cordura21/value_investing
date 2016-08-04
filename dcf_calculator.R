@@ -1,11 +1,13 @@
-library(dplyr)
-dcf_calc(price =  105.47,
-eps = 8.57,
+# library(dplyr)
+xom <-dcf_calc(price =  153575489536,
+eps = 11931 * 1000000,
 dcf.discount.rate = .12,
-growth.rate = .2,
+growth.rate = .118,
 years.growth = 10,
 stable.growth = .04,
-years.stable = 10) %>% lapply(., sum) %>% unlist()
+years.stable = 10)
+
+
 
 dcf_calc <- function(price ,
                      eps,
@@ -44,6 +46,8 @@ dcf_calc <- function(price ,
   pv.growth[is.na(pv.growth)] <- 0
 
   full.eps.vector <- c(-price,stable.eps + growth.eps)
-  return(list(pv.growth,pv.stable,pv.growth + pv.stable))
+  # return(list(pv.growth,pv.stable,(pv.growth + pv.stable),
+  #             -(price / (sum(pv.growth) + sum(pv.stable)) -1))
+  return(-(price / (sum(pv.growth) + sum(pv.stable)) -1))
 
 }

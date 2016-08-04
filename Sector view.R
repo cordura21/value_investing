@@ -10,7 +10,7 @@ remove_outliers <- function(x, na.rm = TRUE, ...) {
   y[x > (qnt[2] + H)] <- NA
   y
 }
-ranking_data <- read_excel('ranking_value-2.xlsx')[,1:17]
+ranking_data <- read_excel('Ranking con mas data.xlsx')
 names(ranking_data)
 
 ranking_data_2 <- ranking_data %>%
@@ -39,16 +39,12 @@ plots[[2]]
 library(formattable)
 
 ranking_data_2 %>% group_by(`GICS Sector`) %>% 
-  summarise(Companies = n(), Rank = median(`Ranking Final`)) %>% 
+  summarise(Companies = n(), Rank = median(`Ranking`)) %>% 
 arrange(Rank) %>%formattable() 
 
 
-ranking_data_2 %>% select(`Short Name`,`GICS Sector`, `Market Cap`,
-                          `Promedio ROE 20 Anos`,`Desvio ROE 20 Anos`,
-                          `Ranking Final`,net_income ) %>% 
+ranking_data_2 %>% 
   group_by(`GICS Sector`) %>% 
-  arrange(`Ranking Final`) %>% 
-  filter(`Ranking Final` < quantile(`Ranking Final`, .05)) %>%
-  mutate(`Market Cap` = `Market Cap` / 1000000, 
-         net_income = net_income / 1000000,
-         `Ranking Final` = NULL, PE = `Market Cap` / net_income) %>% formattable() 
+  arrange(`Ranking`) %>% 
+  filter(`Ranking` < quantile(`Ranking`, .05)) %>%
+  write.csv(.,'best-companies.csv', row.names = FALSE)
