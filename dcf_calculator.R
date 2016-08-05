@@ -1,12 +1,12 @@
-# library(dplyr)
-xom <-dcf_calc(price =  153575489536,
-eps = 11931 * 1000000,
-dcf.discount.rate = .12,
-growth.rate = .118,
-years.growth = 10,
-stable.growth = .04,
-years.stable = 10)
-
+# # library(dplyr)
+# xom <-dcf_calc(price =  153575489536,
+# eps = 11931 * 1000000,
+# dcf.discount.rate = .12,
+# growth.rate = .118,
+# years.growth = 10,
+# stable.growth = .04,
+# years.stable = 10)
+# 
 
 
 dcf_calc <- function(price ,
